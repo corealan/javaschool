@@ -1,7 +1,5 @@
 C:\Users\postgres\SecurityTest\src\main\java\security\dao\security\UserDAOImpl.java
 C:\Users\postgres\SecurityTest\src\main\java\security\service\StationServiceImpl.java
-C:\Users\postgres\SecurityTest\src\main\java\security\dao\DirectionDAO.java
-C:\Users\postgres\SecurityTest\src\main\java\security\dao\DirectionDAOImpl.java
 C:\Users\postgres\SecurityTest\src\main\java\security\dao\StationDAO.java
 C:\Users\postgres\SecurityTest\src\main\java\security\dao\security\UserDAO.java
 C:\Users\postgres\SecurityTest\src\main\java\security\config\WebConfig.java
@@ -18,5 +16,4 @@ C:\Users\postgres\SecurityTest\src\main\java\security\service\StationService.jav
 C:\Users\postgres\SecurityTest\src\main\java\security\model\security\Role.java
 C:\Users\postgres\SecurityTest\src\main\java\security\config\WebAppInitializer.java
 C:\Users\postgres\SecurityTest\src\main\java\security\dao\security\RoleDAO.java
-C:\Users\postgres\SecurityTest\src\main\java\security\model\Direction.java
 C:\Users\postgres\SecurityTest\src\main\java\security\config\SecurityConfig.java

@@ -7,7 +7,6 @@ security\dao\security\UserDAO.class
 security\dao\StationDAOImpl.class
 security\dao\StationDAO.class
 security\config\HibernateConfig.class
-security\model\Direction.class
 security\controllers\AppController.class
 security\dao\security\UserDAOImpl.class
 security\service\StationService.class
@@ -16,7 +15,5 @@ security\model\security\Role.class
 security\model\security\User.class
 security\service\StationServiceImpl.class
 security\config\WebConfig.class
-security\dao\DirectionDAOImpl.class
 security\config\SecurityInit.class
-security\dao\DirectionDAO.class
 security\dao\security\RoleDAOImpl.class

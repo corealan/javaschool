@@ -1,11 +1,9 @@
 package security.dao;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import security.model.Direction;
 import security.model.Station;
 
 import java.util.List;
@@ -37,4 +35,5 @@ public class StationDAOImpl implements StationDAO {
         query.setParameter("name", name);
         return query.uniqueResult();
     }
+
 }

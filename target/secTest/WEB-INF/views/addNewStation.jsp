@@ -20,8 +20,8 @@
             <td><input type='text' name='stationName' value=''></td>
         </tr>
         <tr>
-            <td>Название соседа слева</td>
-            <td><input type='text' name='leftNeighbourName' /></td>
+            <td>Название смежной станции</td>
+            <td><input type='text' name='adjacentStation' /></td>
         </tr>
         <tr>
             <td>Название соседа справа</td>

@@ -3,29 +3,30 @@ package security.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import security.dao.DirectionDAO;
+import security.dao.RouteDAO;
 import security.dao.StationDAO;
-import security.model.Direction;
+import security.model.Route;
 import security.model.Station;
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.List;
 @Service
 @Transactional
 public class StationServiceImpl implements StationService {
 
+    private static List<LinkedList<Station>> routes = new LinkedList<LinkedList<Station>>();
+
     @Autowired
     StationDAO stationDAO;
+
     @Autowired
-    DirectionDAO directionDAO;
+    RouteDAO routeDAO;
 
     public void saveStation(Station station) {
         stationDAO.saveStation(station);
     }
 
-    public void saveDirection(Direction direction){
-        directionDAO.saveDirection(direction);
-    }
+    public void saveRoute(Route route){ routeDAO.saveRoute(route);}
 
     public Station getStationById(long id) {
         return stationDAO.getStationById(id);
@@ -34,108 +35,67 @@ public class StationServiceImpl implements StationService {
     public  Station getStationByName(String name){
         return stationDAO.getStationByName(name);
     }
-    public List<Direction> getStationDirections(Station station) {
-        return station.getDirections();
-    }
 
     public List<Station> getAllStations() {
         return stationDAO.getAllStations();
     }
 
-    public void addDirectionToStation(Direction direction, Station station) {
-        ArrayList<Direction> directions = new ArrayList<Direction>();
-        for(Direction d : station.getDirections()){
-            directions.add(d);
+    public void addNewStation(String name, String adjacentName) {
+        Station station = getStationByName(name);
+        Station adjacent = getStationByName(adjacentName);
+
+        if(station == null) {
+            station = new Station();
+            station.setName(name);
+
+            if (adjacent != null) {
+                station.addAdjacent(adjacent);
+                adjacent.addAdjacent(station);
+                saveStation(station);
+            } else saveStation(station);
+        } else {
+            station.addAdjacent(adjacent);
+            adjacent.addAdjacent(station);
+            saveStation(station);
         }
-        directions.add(direction);
-        station.setDirections(directions);
-        saveStation(station);
     }
 
-    public void addStationToDirection(Station station, Direction direction) {
-        direction.addStation(station);
-        saveDirection(direction);
+    public List<LinkedList<Station>> getRoutes(String departure, String destination){
+        routes.clear();
+        Station departureStation = getStationByName(departure);
+        Station destinationStation = getStationByName(destination);
+        LinkedList<Station> visited = new LinkedList<Station>();
+        visited.add(departureStation);
+        depthFirst(destination, visited);
+        Route route = new Route();
+        for(LinkedList<Station> newRoute : routes) {
+            route.setStations(newRoute);
+
+        }
+        return routes;
     }
 
-    public List<Direction> getDirectionsThroughTwoStations(Station a, Station b) {
-        List<Direction> directions = new ArrayList<Direction>();
-        for(Direction d : a.getDirections()){
-            if(d.containsStation(b)){
-                directions.add(d);
+    private static void depthFirst(String destination,LinkedList<Station> visited){
+
+        LinkedList<Station> nodes = new LinkedList<Station>(visited.getLast().getAdjacent());
+        for(Station node : nodes){
+            if(visited.contains(node)){
+                continue;
+            }
+            if(node.getName().equals(destination)){
+                visited.add(node);
+                routes.add(new LinkedList<Station>(visited));
+                visited.removeLast();
+                break;
             }
         }
-        return directions;
-    }
-
-    public void addNewStation(String name, String leftNeighbourName, String rightNeighbourName) {
-        Station station = new Station();
-        station.setName(name);
-        if (leftNeighbourName == "" && rightNeighbourName == "") {            //Если у новой станции нет соседей
-            Direction direction = new Direction();
-            addStationToDirection(station, direction);
-
-        } else if ((leftNeighbourName != "" && rightNeighbourName == "") || (leftNeighbourName == "" && rightNeighbourName != "")) {          //Если у новой станции есть один сосед
-            String adjoiningStationName;
-            if (rightNeighbourName != "") adjoiningStationName = rightNeighbourName;
-            else adjoiningStationName = leftNeighbourName;
-
-            Station adjoiningStation = getStationByName(adjoiningStationName);
-
-            Direction tempDirection = adjoiningStation.getDirections().get(0);
-
-            if (tempDirection.getStations().indexOf(adjoiningStation) == tempDirection.getStations().size() - 1) { //Если станция крайняя в направлении
-
-                List<Direction> tempDirections = adjoiningStation.getDirections();
-                for(int i = 0; i < tempDirections.size(); i++){
-
-                    if(getAllStations().contains(getStationByName(name))){
-                        addStationToDirection(getStationByName(name), tempDirections.get(i));
-                    } else
-                        addStationToDirection(station, tempDirections.get(i));
-                }
-
-            } else {
-                List<Direction> adjoiningStationDirections = adjoiningStation.getDirections();
-
-                for (int j = 0; j < adjoiningStationDirections.size(); j++) {
-
-                    List<Station> adjoiningDirectionStations = adjoiningStationDirections.get(j).getStations();
-                    Direction newDirection = new Direction();
-                    List<Station> subStations = new LinkedList<Station>(adjoiningDirectionStations.subList(0, adjoiningStationDirections.get(j).getStations().indexOf(adjoiningStation) + 1));
-                    for (Station s : subStations) {
-                        newDirection.addStation(s);
-                    }
-                    newDirection.addStation(station);
-                    saveDirection(newDirection);
-
-                    newDirection = new Direction();
-                    List<Station> subStations1 = new LinkedList<Station>(adjoiningDirectionStations.subList(adjoiningStationDirections.get(j).getStations().indexOf(adjoiningStation), adjoiningDirectionStations.size()));
-                    newDirection.addStation(station);
-                    for (Station s : subStations1) {
-                        newDirection.addStation(s);
-                    }
-                    saveDirection(newDirection);
-                }
+        for(Station node : nodes){
+            if(visited.contains(node) || node.getName().equals(destination)){
+                continue;
             }
-        } else if (leftNeighbourName != "" && rightNeighbourName != "") {
-            Station a = getStationByName(leftNeighbourName);
-            Station b = getStationByName(rightNeighbourName);
-
-            List<Direction> directions = getDirectionsThroughTwoStations(a, b);
-            int aIndex = directions.get(0).getStations().indexOf(a),
-                    bIndex = directions.get(0).getStations().indexOf(b);
-
-            System.out.println("aIndex = " + aIndex);
-            System.out.println("bIndex = " + bIndex);
-
-            if (Math.abs(aIndex - bIndex) == 1) {
-                for (Direction d : directions) {
-                    if (aIndex > bIndex) {
-                        d.insertNewStation(bIndex + 1, station);
-                    } else d.insertNewStation(aIndex + 1, station);
-                    saveDirection(d);
-                }
-            }
+            visited.addLast(node);
+            depthFirst(destination, visited);
+            visited.removeLast();
         }
     }
 }

@@ -13,8 +13,16 @@ public class Station {
     @Column(name = "station_name", unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "stations")
-    private List<Direction> directions;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Station> adjacent;
+
+    public List<Station> getAdjacent() {
+        return adjacent;
+    }
+
+    public void setAdjacent(List<Station> adjacent) {
+        this.adjacent = adjacent;
+    }
 
     public Long getId() {
         return id;
@@ -32,19 +40,10 @@ public class Station {
         this.name = name;
     }
 
-    public List<Direction> getDirections() {
-        return directions;
+    public void addAdjacent(Station station){
+        adjacent.add(station);
     }
-
-    public void setDirections(ArrayList<Direction> directions) {
-        this.directions = directions;
-    }
-
-    public void addDirection(Direction direction){
-        directions.add(direction);
-    }
-
     public Station() {
-        directions = new LinkedList<Direction>();
+        adjacent = new ArrayList<Station>();
     }
 }

@@ -12,9 +12,13 @@ public class Station {
     private Long id;
     @Column(name = "station_name", unique = true)
     private String name;
-
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Station> adjacent;
+
+    @OneToMany(mappedBy = "station")
+    private List<Schedule> schedules;
+
+
 
     public List<Station> getAdjacent() {
         return adjacent;
@@ -45,5 +49,18 @@ public class Station {
     }
     public Station() {
         adjacent = new ArrayList<Station>();
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
+    @Override
+    public String toString() {
+        return id + "";
     }
 }

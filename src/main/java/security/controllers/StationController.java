@@ -2,14 +2,10 @@ package security.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import security.model.Station;
 import security.service.StationService;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -42,10 +38,10 @@ public class StationController {
     }
 
     @RequestMapping(value = "/routeStationSelect", method = RequestMethod.POST)
-    public ModelAndView routeStationSelect(ModelAndView model, @RequestParam(name = "route")LinkedList<Station> route){
-        for(Station s : route){
-            System.out.println(s.getName());
-        }
+    public ModelAndView routeStationSelect(ModelAndView model, @RequestParam Map<String,String> params){
+        model.addObject("route",stationService.getStationsListFromString(params.get("route")));
+        System.out.println(stationService.getStationsListFromString(params.get("route")));
+        model.setViewName("routeStationSelect");
         return model;
     }
 }

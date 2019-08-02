@@ -12,5 +12,6 @@ public interface StationService {
     void addNewStation(String name, String adjacentName);
     List<Station> getAllStations();
     Station getStationByName(String name);
-    List<LinkedList<Station>> getRoutes(String a, String b);
+    List<LinkedList<Station>> getRoutes(String departure, String destination);
+    List<Station> getStationsListFromString(String ids);
 }

@@ -3,11 +3,11 @@ package security.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import security.dao.RouteDAO;
 import security.dao.StationDAO;
-import security.model.Route;
 import security.model.Station;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 @Service
@@ -19,14 +19,9 @@ public class StationServiceImpl implements StationService {
     @Autowired
     StationDAO stationDAO;
 
-    @Autowired
-    RouteDAO routeDAO;
-
     public void saveStation(Station station) {
         stationDAO.saveStation(station);
     }
-
-    public void saveRoute(Route route){ routeDAO.saveRoute(route);}
 
     public Station getStationById(long id) {
         return stationDAO.getStationById(id);
@@ -63,16 +58,21 @@ public class StationServiceImpl implements StationService {
     public List<LinkedList<Station>> getRoutes(String departure, String destination){
         routes.clear();
         Station departureStation = getStationByName(departure);
-        Station destinationStation = getStationByName(destination);
         LinkedList<Station> visited = new LinkedList<Station>();
         visited.add(departureStation);
         depthFirst(destination, visited);
-        Route route = new Route();
-        for(LinkedList<Station> newRoute : routes) {
-            route.setStations(newRoute);
-
-        }
         return routes;
+    }
+
+    public List<Station> getStationsListFromString(String ids) {
+        List<Station> result = new ArrayList<Station>();
+        String str = ids.substring(1, ids.length()-1);
+        List<String> strings = Arrays.asList(str.split(", "));
+
+        for(String s : strings){
+            result.add(getStationById(Long.parseLong(s)));
+        }
+        return result;
     }
 
     private static void depthFirst(String destination,LinkedList<Station> visited){

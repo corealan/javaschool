@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: postgres
+  Passenger: postgres
   Date: 28.07.2019
   Time: 13:43
   To change this template use File | Settings | File Templates.
@@ -21,11 +21,12 @@
         </tr>
         <tr>
             <td>Название смежной станции</td>
-            <td><input type='text' name='adjacentStation' /></td>
+            <td><input id="test" type='text' name='adjacentStation' /></td>
         </tr>
         <tr>
-            <td>Название соседа справа</td>
-            <td><input type='text' name='rightNeighbourName' /></td>
+            <td>Название 2й смежной станции<br/>
+                (если новая станция между существующими)</td>
+            <td><input type='text' name='adjacentStation2' /></td>
         </tr>
         <tr>
             <td><input name="submit" type="submit" value="Добавить станцию" /></td>

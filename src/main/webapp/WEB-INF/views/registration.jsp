@@ -11,16 +11,29 @@ ${message}
     <table>
         <tr>
             <td>Имя пользователя:</td>
-            <td><input type='text' name='username' value=''></td>
+            <td><input type='text' name='username' value='' required></td>
         </tr>
         <tr>
             <td>Пароль:</td>
-            <td><input type='password' name='password' /></td>
+            <td><input type='password' name='password' required/></td>
         </tr>
         <tr>
             <td>Подтвердите пароль:</td>
-            <td><input type='password' name='passwordConfirm' /></td>
+            <td><input type='password' name='passwordConfirm' required/></td>
         </tr>
+        <tr>
+            <td>Имя</td>
+            <td><input type='text' name='firstName' required/></td>
+        </tr>
+        <tr>
+            <td>Фамилия</td>
+            <td><input type='text' name='lastName' required/></td>
+        </tr>
+        <tr>
+            <td>Дата рождения</td>
+            <td><input type="date" name="DOB" required/></td>
+        </tr>
+
         <tr>
             <td><input name="submit" type="submit" value="Зарегистрироваться" /></td>
             <td><input name="reset" type="reset" />

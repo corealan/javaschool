@@ -9,6 +9,7 @@ import security.service.StationService;
 import java.util.Map;
 
 @Controller
+@RequestMapping(value = "/admin")
 public class StationController {
 
     @Autowired
@@ -16,7 +17,7 @@ public class StationController {
 
     @RequestMapping(value = "/addNewStation",method = RequestMethod.POST)
     public String addNewStation(@RequestParam Map<String, String> paramMap){
-        stationService.addNewStation(paramMap.get("stationName"), paramMap.get("adjacentStation"));
+        stationService.addNewStation(paramMap.get("stationName"), paramMap.get("adjacentStation"), paramMap.get("adjacentStation2"));
         return "addNewStation";
     }
 
@@ -40,7 +41,6 @@ public class StationController {
     @RequestMapping(value = "/routeStationSelect", method = RequestMethod.POST)
     public ModelAndView routeStationSelect(ModelAndView model, @RequestParam Map<String,String> params){
         model.addObject("route",stationService.getStationsListFromString(params.get("route")));
-        System.out.println(stationService.getStationsListFromString(params.get("route")));
         model.setViewName("routeStationSelect");
         return model;
     }

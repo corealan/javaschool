@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import security.dao.security.RoleDAO;
-import security.dao.security.UserDAO;
-import security.model.security.Role;
-import security.model.security.User;
+import security.service.PassengerService;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class AppController {
@@ -27,35 +23,36 @@ public class AppController {
     BCryptPasswordEncoder encoder;
     @Autowired
     RoleDAO roleDAO;
-    @Autowired
-    UserDAO userDAO;
 
-    @RequestMapping("/admin")
+    @Autowired
+    PassengerService passengerService;
+
+    @RequestMapping(value = "/admin")
     public ModelAndView admin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String welcomeMessage = "Готов ударно потрудиться, " + authentication.getName() + "?";
+        String welcomeMessage = "Добро пожаловать, " + authentication.getName() + "!";
         return new ModelAndView("admin", "welcomeMessage", welcomeMessage);
     }
 
-    @RequestMapping("/user")
+    @RequestMapping(value = "/passenger")
     public ModelAndView user() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String welcomeMessage = "Добро пожаловать, " + authentication.getName() + "!";
-        return new ModelAndView("user", "welcomeMessage", welcomeMessage);
+        String welcomeMessage = "Добро пожаловать, " + passengerService.findByUsername(authentication.getName()).getFirstName() + "!";
+        return new ModelAndView("passenger", "welcomeMessage", welcomeMessage);
     }
 
-    @RequestMapping("/error")
+    @RequestMapping(value = "/error")
     public String error(ModelMap model) {
         model.addAttribute("error", "true");
-        return "login";
+        return "loginPage";
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping(value = "/logout")
     public String logout(ModelMap model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.setAuthenticated(false);
         model.addAttribute("logout", "true");
-        return "login";
+        return "loginPage";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -64,23 +61,22 @@ public class AppController {
             model.addAttribute("message", "Пароли не совпали!");
             return "registration";
         }
-        if(userDAO.findByUsername(paramMap.get("username"))!=null){
+        if(passengerService.findByUsername(paramMap.get("username"))!=null){
             model.addAttribute("message", "Пользователь с таким именм уже зарегистрирован!");
             return "registration";
         }
-        User user = new User();
-        user.setUsername(paramMap.get("username"));
-        user.setPassword(encoder.encode(paramMap.get("password")));
-        Set<Role> roles = new HashSet<Role>();
-        roles.add(roleDAO.getRoleById(2L));
-        user.setRoles(roles);
-        userDAO.saveUser(user);
-        return "login";
+        passengerService.passengerRegistration(paramMap);
+        return "loginPage";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "login";
+        return "loginPage";
+    }
+
+    @RequestMapping(value = "/loginPage", method = RequestMethod.POST)
+    public String loginPage() {
+        return "loginPage";
     }
 
     @RequestMapping("/registration")

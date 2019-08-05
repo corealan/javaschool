@@ -18,14 +18,16 @@ public class Station {
     @OneToMany(mappedBy = "station")
     private List<Schedule> schedules;
 
-
-
     public List<Station> getAdjacent() {
         return adjacent;
     }
 
     public void setAdjacent(List<Station> adjacent) {
         this.adjacent = adjacent;
+    }
+
+    public void removeAdjacent(Station adjacentToRemove){
+        adjacent.remove(adjacentToRemove);
     }
 
     public Long getId() {

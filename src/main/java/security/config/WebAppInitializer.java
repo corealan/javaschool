@@ -1,6 +1,9 @@
 package security.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -19,4 +22,9 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[] {"/"};
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter("UTF-8", true);
+        return new Filter[]{filter};
+    }
 }

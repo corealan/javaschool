@@ -12,11 +12,22 @@ public class Train {
     @Column(name = "train_number")
     private Integer trainNumber;
 
-    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OrderBy(value = "departureTime")
     private List<Schedule> schedules;
 
     @ManyToMany
     private List<Station> route;
+    @Column(name = "number_of_seats")
+    private Integer numberOfSeats;
+
+    public Integer getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(Integer numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
 
     public void addSchedule(Schedule schedule){
         schedules.add(schedule);

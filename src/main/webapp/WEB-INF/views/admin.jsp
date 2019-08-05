@@ -11,11 +11,11 @@
 <h2>${welcomeMessage}</h2>
 <br>
 
-<p><strong>Чем займешься?</strong></p>
+<p><strong>Выберите действие:</strong></p>
 <ul type="square">
 
-    <li>Добавить новую станцию</li>
-    <li>Добавить новый поезд</li>
+    <li><a href="/admin/addNewStation"> Добавить новую станцию</a></li>
+    <li><a href="/admin/routesRequest"> Добавить новый поезд</a></li>
     <li>Просмотр зарегистрированных на поезд пассажиров</li>
     <li>Просмотр всех поездов</li>
 

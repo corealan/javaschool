@@ -10,7 +10,7 @@
 <br>
 <h4>
     <a href="admin">Сотрудникам</a><br/>
-    <a href="user">Клиентам компании</a><br/>
+    <a href="passenger">Клиентам компании</a><br/>
     <a href="registration">Зарегистрироваться</a>
 </h4>
 </body>

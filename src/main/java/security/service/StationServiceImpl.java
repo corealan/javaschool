@@ -35,24 +35,42 @@ public class StationServiceImpl implements StationService {
         return stationDAO.getAllStations();
     }
 
-    public void addNewStation(String name, String adjacentName) {
+    public void addNewStation(String name, String adjacentName, String adjacentName2) {
         Station station = getStationByName(name);
         Station adjacent = getStationByName(adjacentName);
+        Station adjacent2 = getStationByName(adjacentName2);
 
         if(station == null) {
             station = new Station();
             station.setName(name);
 
-            if (adjacent != null) {
+            if (adjacent != null && adjacent2 == null) {
                 station.addAdjacent(adjacent);
                 adjacent.addAdjacent(station);
                 saveStation(station);
-            } else saveStation(station);
-        } else {
+            } else
+                if(adjacent != null && adjacent2 != null){
+                    addStationBetween(station, adjacent, adjacent2);
+            }
+            else saveStation(station);
+        } else
+            if(!station.getAdjacent().contains(adjacent) && station.getId()!=adjacent.getId()){
             station.addAdjacent(adjacent);
             adjacent.addAdjacent(station);
             saveStation(station);
         }
+    }
+
+    private void addStationBetween(Station newStation, Station adjacent1, Station adjacent2){
+        newStation.addAdjacent(adjacent1);
+        adjacent1.addAdjacent(newStation);
+        adjacent1.removeAdjacent(adjacent2);
+
+        newStation.addAdjacent(adjacent2);
+        adjacent2.addAdjacent(newStation);
+        adjacent2.removeAdjacent(adjacent1);
+
+        saveStation(newStation);
     }
 
     public List<LinkedList<Station>> getRoutes(String departure, String destination){

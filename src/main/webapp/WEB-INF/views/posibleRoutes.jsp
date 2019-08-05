@@ -5,7 +5,7 @@
     <title>PossibleRoutes</title>
 </head>
 <body>
-<form action="/routeStationSelect" method="POST">
+<form action="/admin/routeStationSelect" method="POST">
     <select name="route" size="${routes.size()}">
         <c:forEach var = "route" items="${routes}">
             <option value="${route}">
@@ -20,6 +20,7 @@
         </c:forEach>
     </select>
     <input type="submit" value="Далее">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 
 

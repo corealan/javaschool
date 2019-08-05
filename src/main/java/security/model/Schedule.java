@@ -64,4 +64,5 @@ public class Schedule {
     public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
+
 }

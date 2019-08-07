@@ -7,13 +7,13 @@
 </head>
 <body>
 <h2>${welcomeMessage}</h2>
-
+<h3>${message}</h3>
 <p><strong>Чего бы вы хотели?</strong></p>
 <ul type="square">
 
     <li><a href="/passenger/findTrains">Найти поезд</a></li>
-    <li>Посмотреть расписание</li>
-    <li>Купить билет</li>
+    <li><a href="/passenger/getSchedule">Посмотреть расписание</a> </li>
+    <li><a href="/passenger/ticketPurchase">Купить билет</a> </li>
 
 </ul>
 <a href="<c:url value="/"/> ">На Главную!</a>

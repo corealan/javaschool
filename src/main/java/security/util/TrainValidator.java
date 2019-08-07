@@ -1,12 +1,11 @@
-package security.validators;
+package security.util;
 
 import security.model.Schedule;
 import security.model.Train;
 
-import java.util.Date;
 import java.util.List;
 
-public class trainValidator {
+public class TrainValidator {
     private static String message;
     public static boolean trainScheduleValidate(Train train){
         List<Schedule> trainSchedules = train.getSchedules();

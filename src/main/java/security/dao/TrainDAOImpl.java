@@ -24,6 +24,12 @@ public class TrainDAOImpl implements TrainDAO {
         } else sessionFactory.getCurrentSession().merge(train);
     }
 
+    public Train findTrainById(Long id) {
+        Query<Train> query = sessionFactory.getCurrentSession().createQuery("FROM Train t where t.id = :id");
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
     public List<Train> getAllTrains() {
         Query query = sessionFactory.getCurrentSession().createQuery("FROM Train t");
         return query.list();

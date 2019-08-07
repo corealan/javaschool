@@ -20,6 +20,13 @@ public class TrainController {
     @Autowired
     private StationService stationService;
 
+    @RequestMapping(value = "admin/getAllTrains", method = RequestMethod.GET)
+    public ModelAndView allTrains(ModelAndView model,@RequestParam Map<String, String> params){
+        model.addObject("trains",trainService.getAllTrains());
+        model.setViewName("trainList");
+        return model;
+    }
+
     @RequestMapping(value = "/admin/setTrainRoute", method = RequestMethod.POST)
     public ModelAndView setTrainRoute(ModelAndView model, @RequestParam Map<String, String> params){
         String message = trainService.addNewTrain(params);

@@ -35,6 +35,26 @@ public class Passenger implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "passenger")
     private List<Ticket> tickets;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Passenger passenger = (Passenger) o;
+
+        if (!firstName.equals(passenger.firstName)) return false;
+        if (!lastName.equals(passenger.lastName)) return false;
+        return dateOfBirth.equals(passenger.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + dateOfBirth.hashCode();
+        return result;
+    }
+
     public Passenger() {
     }
 

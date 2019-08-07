@@ -2,6 +2,7 @@ security\service\TrainServiceImpl.class
 security\service\UserDAODetailsService.class
 security\dao\security\RoleDAO.class
 security\model\Ticket.class
+security\dao\TicketDAO.class
 security\service\StationService.class
 security\controllers\TrainController.class
 security\dao\security\PassengerDAO.class
@@ -12,8 +13,10 @@ security\model\Schedule.class
 security\dao\ScheduleDAOImpl.class
 security\dao\ScheduleDAO.class
 security\service\TrainService.class
+security\service\TicketService.class
 security\config\SecurityInit.class
 security\dao\security\RoleDAOImpl.class
+security\util\TrainValidator.class
 security\config\WebAppInitializer.class
 security\dao\security\PassengerDAOImpl.class
 security\config\SecurityConfig.class
@@ -21,13 +24,17 @@ security\controllers\PassengerController.class
 security\controllers\StationController.class
 security\dao\StationDAOImpl.class
 security\dao\StationDAO.class
+security\util\test.class
 security\config\HibernateConfig.class
 security\model\Train.class
+security\service\TicketServiceImpl.class
 security\controllers\AppController.class
+security\controllers\TicketController.class
 security\service\PassengerServiceImpl.class
 security\dao\TrainDAOImpl.class
 security\model\Station.class
 security\model\security\Role.class
 security\dao\TrainDAO.class
-security\validators\trainValidator.class
 security\model\security\Passenger.class
+security\dao\TicketDAOImpl.class
+security\util\Util.class

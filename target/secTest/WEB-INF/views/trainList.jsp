@@ -34,6 +34,7 @@
 
             <td>${train.schedules.get(train.schedules.size()-1).station.name}</td>
             <td>${train.schedules.get(train.schedules.size()-1).arrivalTime}</td>
+            <c:if test="${role==1}"><td><a href="/passenger/ticketPurchase/${train.id}/${departure}/${destination}">Купить билет</a> </td></c:if>
         </tr>
     </c:forEach>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

@@ -17,7 +17,7 @@
     <li><a href="/admin/addNewStation"> Добавить новую станцию</a></li>
     <li><a href="/admin/routesRequest"> Добавить новый поезд</a></li>
     <li>Просмотр зарегистрированных на поезд пассажиров</li>
-    <li>Просмотр всех поездов</li>
+    <li><a href="/admin/getAllTrains"> Просмотр всех поездов</a></li>
 
 </ul>
 <form action="logout" method="post">

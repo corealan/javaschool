@@ -23,7 +23,6 @@ public class AppController {
     BCryptPasswordEncoder encoder;
     @Autowired
     RoleDAO roleDAO;
-
     @Autowired
     PassengerService passengerService;
 

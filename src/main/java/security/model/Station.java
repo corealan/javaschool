@@ -15,7 +15,7 @@ public class Station {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Station> adjacent;
 
-    @OneToMany(mappedBy = "station")
+    @OneToMany(mappedBy = "station",fetch = FetchType.EAGER)
     private List<Schedule> schedules;
 
     public List<Station> getAdjacent() {

@@ -3,12 +3,11 @@ package security.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import security.dao.ScheduleDAO;
 import security.dao.TrainDAO;
 import security.model.Schedule;
 import security.model.Station;
 import security.model.Train;
-import security.validators.trainValidator;
+import security.util.TrainValidator;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -70,10 +69,10 @@ public class TrainServiceImpl implements TrainService{
             train.addSchedule(schedule);
         }
 
-        if(trainValidator.trainScheduleValidate(train)) {
+        if(TrainValidator.trainScheduleValidate(train)) {
             trainDAO.saveTrain(train);
         }
-        return trainValidator.getMessage();
+        return TrainValidator.getMessage();
     }
 
     public List<Train> findTrains(Map<String, String> params) {
@@ -86,6 +85,10 @@ public class TrainServiceImpl implements TrainService{
 
     public List<Train> getAllTrains() {
         return trainDAO.getAllTrains();
+    }
+
+    public Train findTrainById(Long id) {
+        return trainDAO.findTrainById(id);
     }
 
     private Date getDate(String s){

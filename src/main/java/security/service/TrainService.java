@@ -9,4 +9,5 @@ public interface TrainService {
     String addNewTrain(Map<String, String> params);
     List<Train> findTrains(Map<String, String> params);
     List<Train> getAllTrains();
+    Train findTrainById(Long id);
 }

@@ -16,10 +16,13 @@ public class Train {
     @OrderBy(value = "departureTime")
     private List<Schedule> schedules;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Station> route;
+
     @Column(name = "number_of_seats")
     private Integer numberOfSeats;
+
+
 
     public Integer getNumberOfSeats() {
         return numberOfSeats;
@@ -32,6 +35,7 @@ public class Train {
     public void addSchedule(Schedule schedule){
         schedules.add(schedule);
     }
+
     public Long getId() {
         return id;
     }

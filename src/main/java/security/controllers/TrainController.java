@@ -2,9 +2,7 @@ package security.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.service.StationService;
 import security.service.TrainService;
@@ -20,14 +18,14 @@ public class TrainController {
     @Autowired
     private StationService stationService;
 
-    @RequestMapping(value = "admin/getAllTrains", method = RequestMethod.GET)
+    @GetMapping(value = "admin/getAllTrains")
     public ModelAndView allTrains(ModelAndView model,@RequestParam Map<String, String> params){
         model.addObject("trains",trainService.getAllTrains());
         model.setViewName("trainList");
         return model;
     }
 
-    @RequestMapping(value = "/admin/setTrainRoute", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/setTrainRoute")
     public ModelAndView setTrainRoute(ModelAndView model, @RequestParam Map<String, String> params){
         String message = trainService.addNewTrain(params);
         if(message != null){

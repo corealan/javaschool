@@ -1,17 +1,19 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Spring Security</title>
+    <title>Title</title>
+    <link href="resources/css/topnav.css" rel="stylesheet">
 </head>
 <body>
-<h2>Добро пожаловать!</h2>
-<br>
-<h4>
-    <a href="admin">Сотрудникам</a><br/>
-    <a href="passenger">Клиентам компании</a><br/>
-    <a href="registration">Зарегистрироваться</a>
-</h4>
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="/passenger/findTrains">Найти поезд</a>
+    <a href="/passenger/getSchedule">Расписание</a>
+    <div class="topnav-right">
+        <a href="/admin">Сотрудникам</a>
+        <a href="/logout">Выход</a>
+    </div>
+</div>
 </body>
 </html>

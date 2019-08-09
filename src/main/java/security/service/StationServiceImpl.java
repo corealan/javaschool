@@ -56,7 +56,7 @@ public class StationServiceImpl implements StationService {
             }
             else saveStation(station);
         } else
-            if(!station.getAdjacent().contains(adjacent) && station.getId()!=adjacent.getId()){
+            if(!station.getAdjacent().contains(adjacent) && !station.equals(adjacent)){
             station.addAdjacent(adjacent);
             adjacent.addAdjacent(station);
             saveStation(station);

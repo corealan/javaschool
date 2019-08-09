@@ -1,33 +1,40 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: postgre
-  Date: 04.08.2019
-  Time: 18:04
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Find Trains</title>
+    <link href="${pageContext.request.contextPath}/resources/css/topnav.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
 </head>
 <body>
-<h4>Введите станции отправления и назначения:</h4>
-<form action="/passenger/findTrains" method="post">
-    <table>
-        <tr>
-            <td>Станция отправления:</td>
-            <td><input type='text' name='departure' value=''></td>
-            <td><input type="datetime-local" name="after"/></td>
-        </tr>
-        <tr>
-            <td>Станция назначения:</td>
-            <td><input type='text' name='destination' value=''><br></td>
-            <td><input type="datetime-local" name="before"/></td>
+<c:import url="nav.jsp"/>
+<div class="form">
+    <form action="/passenger/findTrains" method="post">
+        <table>
+            <caption>Поиск поездов</caption>
+            <tr>
+                <td>Станция отправления:</td>
+                <td><input type='text' name='departure' required value=''></td>
+            </tr>
+            <tr>
+                <td>Станция назначения:</td>
+                <td><input type='text' name='destination' required value=''><br></td>
+            </tr>
+            <tr>
+                <td>В период с:</td>
+                <td><input type="datetime-local" required name="after"/></td>
 
-        </tr>
-    </table>
-    <input type="submit" value="Найти поезда">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-</form>
+            </tr>
+            <tr>
+                <td>По:</td>
+                <td><input type="datetime-local" required name="before"/></td>
+
+            </tr>
+        </table>
+        <button type="submit">Найти поезда</button>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+</div>
 </body>
 </html>

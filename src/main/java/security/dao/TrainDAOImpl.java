@@ -8,7 +8,6 @@ import security.model.Schedule;
 import security.model.Station;
 import security.model.Train;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,14 +45,13 @@ public class TrainDAOImpl implements TrainDAO {
         query1.setParameter("bId", b.getId());
         query1.setParameter("bArrival", to);
 
-        List<Schedule> schedules1 = query.getResultList(),
-                schedules2 = query1.getResultList();
+        List<Schedule> schedules1 = query.getResultList();
+        List<Schedule> schedules2 = query1.getResultList();
         List<Train> resultTrainList = new ArrayList<Train>();
 
-        System.out.println(schedules1.size() + " " + schedules2.size());
         for(Schedule s1 : schedules1){
          for(Schedule s2 : schedules2){
-             if(s1.getTrain().getId() == s2.getTrain().getId()){
+             if(s1.getTrain().equals(s2.getTrain())){
                  resultTrainList.add(s1.getTrain());
              }
          }

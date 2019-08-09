@@ -2,9 +2,7 @@ package security.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.model.Station;
 import security.service.StationService;
@@ -22,12 +20,12 @@ public class PassengerController {
     @Autowired
     private StationService stationService;
 
-    @RequestMapping(value = "/findTrains", method = RequestMethod.GET)
+    @GetMapping(value = "/findTrains")
     public String findTrains(){
         return "findTrains";
     }
 
-    @RequestMapping(value = "/findTrains", method = RequestMethod.POST)
+    @PostMapping(value = "/findTrains")
     public ModelAndView findTrains(ModelAndView modelAndView,@RequestParam Map<String, String> params){
         modelAndView.addObject("trains",trainService.findTrains(params));
         modelAndView.addObject("role", 1);
@@ -37,14 +35,14 @@ public class PassengerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/getSchedule", method = RequestMethod.GET)
+    @GetMapping(value = "/getSchedule")
     public ModelAndView scheduleRequest(ModelAndView model){
         model.addObject("stations", stationService.getAllStations());
         model.setViewName("stationSchedule");
         return model;
     }
 
-    @RequestMapping(value = "/getSchedule", method = RequestMethod.POST)
+    @PostMapping(value = "/getSchedule")
     public ModelAndView getSchedule(ModelAndView model, @RequestParam Map<String, String> params){
         Station station = stationService.getStationByName(params.get("station"));
         System.out.println(station);

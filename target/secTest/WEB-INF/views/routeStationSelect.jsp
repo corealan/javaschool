@@ -1,16 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
+
 <html>
 <head>
+    <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
     <title>RouteStationSelect</title>
 </head>
 <body>
+<c:import url="employeeNav.jsp"/>
 <h3 style="color: red"><c:out value="${message}"/></h3>
 <form action="/admin/setTrainRoute" method="POST">
     <label>Введите номер поезда <input type="text" name="trainNumber"></label>
     <label>Введите число мест в поезеде <input type="text" name="numberOfSeats"></label>
-    <table border="1">
+    <table class="allTrains">
+        <caption>Задайте расписание поезда</caption>
         <tr>
             <td>Название станции</td>
             <td>Остановка</td>

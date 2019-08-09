@@ -1,19 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: postgre
-  Date: 04.08.2019
-  Time: 16:49
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
+
 <head>
     <title>TrainList</title>
+    <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
+
 </head>
 <body>
-<h4>Список всех поездов: </h4>
-<table border="1">
+<c:if test="${role==1}"><c:import url="nav.jsp"/></c:if>
+<c:if test="${role!=1}"><c:import url="employeeNav.jsp"/></c:if>
+
+<table class="allTrains">
+    <caption>Список поездов</caption>
     <tr>
         <td>ID</td>
         <td>Номер поезда</td>
@@ -30,10 +30,10 @@
             <td>${train.numberOfSeats}</td>
 
             <td>${train.schedules.get(0).station.name}</td>
-            <td>${train.schedules.get(0).departureTime}</td>
+            <td>${train.schedules.get(0).departureTime.toLocaleString()}</td>
 
             <td>${train.schedules.get(train.schedules.size()-1).station.name}</td>
-            <td>${train.schedules.get(train.schedules.size()-1).arrivalTime}</td>
+            <td>${train.schedules.get(train.schedules.size()-1).arrivalTime.toLocaleString()}</td>
             <c:if test="${role==1}"><td><a href="/passenger/ticketPurchase/${train.id}/${departure}/${destination}">Купить билет</a> </td></c:if>
         </tr>
     </c:forEach>

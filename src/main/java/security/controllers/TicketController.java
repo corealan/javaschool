@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.model.Station;
 import security.service.PassengerService;
@@ -44,7 +41,7 @@ public class TicketController {
         return model;
     }
 
-    @RequestMapping(value = "/passenger/purchaseTicket", method = RequestMethod.POST)
+    @PostMapping(value = "/passenger/purchaseTicket")
     public ModelAndView purchaseTicket(ModelAndView model, @RequestParam Map<String, String> params){
 
         model.addObject("message",ticketService.buyTicket(params));

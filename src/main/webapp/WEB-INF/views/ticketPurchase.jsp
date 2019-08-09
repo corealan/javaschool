@@ -1,10 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Покупка билета</title>
+    <link href="${pageContext.request.contextPath}/resources/css/topnav.css" rel="stylesheet">
 </head>
 <body>
+<c:import url="nav.jsp"/>
 <h4> Введите ваши данные для покупки билета</h4>
 <form action="/passenger/purchaseTicket" method="POST">
     <h4>На данный маршрут доступно ${numOfTickets} билетов.</h4>

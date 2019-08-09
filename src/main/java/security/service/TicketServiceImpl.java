@@ -22,10 +22,10 @@ import java.util.Map;
 public class TicketServiceImpl implements TicketService {
 
 
-    private final String TOO_LATE = "Нельзя приобрести билет на поезд, до отправлиня которого осталось менее 10 минут.";
-    private final String NOT_ENOUGHT_TICKETS = "Нет доступных для покупки билетов.";
-    private final String ONE_PASSENGER_ONE_TICKET = "Пассажир с такими данными уже зарегистрирован.";
-    private final String SUCCESS = "Билет успешно приобретен!";
+    private static final String TOO_LATE = "Нельзя приобрести билет на поезд, до отправлиня которого осталось менее 10 минут.";
+    private static final String NOT_ENOUGHT_TICKETS = "Нет доступных для покупки билетов.";
+    private static final String ONE_PASSENGER_ONE_TICKET = "Пассажир с такими данными уже зарегистрирован.";
+    private static final String SUCCESS = "Билет успешно приобретен!";
 
     @Autowired
     private TicketDAO ticketDAO;
@@ -60,11 +60,15 @@ public class TicketServiceImpl implements TicketService {
 
     public int getNumOfTicketsOnSale(Train train, Station departure, Station destination) {
         List<List<Station>> subroutes = Util.getSubRoutes(train.getRoute());
+        System.out.println("ROUTE" + train.getRoute());
+        for(List<Station> subroute : subroutes){
+            System.out.println(subroute);
+        }
         int result = train.getNumberOfSeats();
 
         List<List<Station>> removeList = new ArrayList<List<Station>>();
         for (List<Station> subroute : subroutes) {
-            if (subroute.get(0).getId() == destination.getId() || subroute.get(subroute.size() - 1).getId() == departure.getId() || (!subroute.contains(departure) && !subroute.contains(destination) && !train.getRoute().containsAll(subroute))) {
+            if (subroute.get(0).equals(destination) || subroute.get(subroute.size() - 1).equals(departure) || (!subroute.contains(departure) && !subroute.contains(destination) && !train.getRoute().containsAll(subroute))) {
                 removeList.add(subroute);
             }
         }
@@ -86,7 +90,7 @@ public class TicketServiceImpl implements TicketService {
         }
 
         for(Ticket ticket : ticketService.getTicketsOnTrain(train)){
-            if(ticket.getPassenger().equals(passenger) && ticket.getTrain().getId()==train.getId()){
+            if(ticket.getPassenger().equals(passenger) && ticket.getTrain().equals(train)){
                 return ONE_PASSENGER_ONE_TICKET;
             }
         }

@@ -65,4 +65,26 @@ public class Station {
     public String toString() {
         return id + "";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Station station = (Station) o;
+
+        if (!id.equals(station.id)) return false;
+        if (!name.equals(station.name)) return false;
+        if (!adjacent.equals(station.adjacent)) return false;
+        return schedules.equals(station.schedules);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + adjacent.hashCode();
+        result = 31 * result + schedules.hashCode();
+        return result;
+    }
 }

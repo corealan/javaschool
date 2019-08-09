@@ -16,13 +16,36 @@ public class Train {
     @OrderBy(value = "departureTime")
     private List<Schedule> schedules;
 
+    @OrderBy(value = "schedules")
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Station> route;
 
     @Column(name = "number_of_seats")
     private Integer numberOfSeats;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Train train = (Train) o;
+
+        if (!id.equals(train.id)) return false;
+        if (!trainNumber.equals(train.trainNumber)) return false;
+        if (!schedules.equals(train.schedules)) return false;
+        if (!route.equals(train.route)) return false;
+        return numberOfSeats.equals(train.numberOfSeats);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + trainNumber.hashCode();
+        result = 31 * result + schedules.hashCode();
+        result = 31 * result + route.hashCode();
+        result = 31 * result + numberOfSeats.hashCode();
+        return result;
+    }
 
     public Integer getNumberOfSeats() {
         return numberOfSeats;
@@ -61,6 +84,10 @@ public class Train {
     }
 
     public List<Station> getRoute() {
+        List<Station> route = new ArrayList<Station>();
+        for(Schedule schedule: schedules){
+            route.add(schedule.getStation());
+        }
         return route;
     }
 

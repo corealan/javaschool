@@ -1,19 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: postgre
-  Date: 05.08.2019
-  Time: 11:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Расписание</title>
+    <link href="${pageContext.request.contextPath}/resources/css/topnav.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
 </head>
 <body>
-<form action="/passenger/getSchedule" method="POST">
-
+<c:import url="nav.jsp"/>
+<form class="form" id="schedule" action="/passenger/getSchedule" method="POST">
     <input type="text" name="station" list="stationList"/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <input type="submit">
@@ -26,8 +22,8 @@
 </datalist>
 
 <c:if test="${schedules.size() > 0}">
-    <h4>Расписание движения поездов по станции ${schedules.get(0).station.name}</h4>
-    <table border="1">
+    <table class="allTrains" id="schedule-table">
+        <caption>Расписание движения поездов по станции ${schedules.get(0).station.name}</caption>
         <tr>
             <td>Номер поезда</td>
             <td>Станция назначения</td>
@@ -38,8 +34,8 @@
             <tr>
                 <td>${schedule.train.trainNumber}</td>
                 <td>${schedule.train.route.get(schedule.train.route.size()-1).name}</td>
-                <td>${schedule.arrivalTime}</td>
-                <td>${schedule.departureTime}</td>
+                <td>${schedule.arrivalTime.toLocaleString()}</td>
+                <td>${schedule.departureTime.toLocaleString()}</td>
             </tr>
         </c:forEach>
     </table>

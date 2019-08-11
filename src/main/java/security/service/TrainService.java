@@ -10,4 +10,5 @@ public interface TrainService {
     List<Train> findTrains(Map<String, String> params);
     List<Train> getAllTrains();
     Train findTrainById(Long id);
+    Train findTrainByNumber(Integer number);
 }

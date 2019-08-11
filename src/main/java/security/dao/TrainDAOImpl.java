@@ -59,4 +59,10 @@ public class TrainDAOImpl implements TrainDAO {
         return resultTrainList;
     }
 
+    public Train findTrainByNumber(Integer number) {
+        Query<Train> query = sessionFactory.getCurrentSession().createQuery("FROM Train t where t.trainNumber = :number");
+        query.setParameter("number", number);
+        return query.getSingleResult();
+    }
+
 }

@@ -41,11 +41,22 @@ public class TicketController {
         return model;
     }
 
-    @PostMapping(value = "/passenger/purchaseTicket")
+    @PostMapping(value = "passenger/purchaseTicket")
     public ModelAndView purchaseTicket(ModelAndView model, @RequestParam Map<String, String> params){
-
         model.addObject("message",ticketService.buyTicket(params));
-        model.setViewName("passenger");
+        model.setViewName("purchaseResult");
+        return model;
+    }
+
+    @GetMapping(value = "/admin/passengersOnTrain")
+    public String passengersOnTrain(){
+        return "passengersOnTrain";
+    }
+
+    @PostMapping(value = "/admin/passengersOnTrain")
+    public ModelAndView passengersOnTrain(@RequestParam(value = "trainNumber") String trainNumber){
+        ModelAndView model = new ModelAndView("passengersOnTrain");
+        model.addObject("tickets", ticketService.getTicketsOnTrain(trainService.findTrainByNumber(Integer.parseInt(trainNumber))));
         return model;
     }
 }

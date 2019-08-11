@@ -55,7 +55,7 @@ public class AppController {
             return REGISTRATION;
         }
         if(passengerService.findByUsername(paramMap.get("username"))!=null){
-            model.addAttribute("message", "Пользователь с таким именм уже зарегистрирован!");
+            model.addAttribute("message", "Пользователь с таким логином уже зарегистрирован!");
             return REGISTRATION;
         }
         passengerService.passengerRegistration(paramMap);

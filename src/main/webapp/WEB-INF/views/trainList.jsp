@@ -17,11 +17,13 @@
     <tr>
         <td>ID</td>
         <td>Номер поезда</td>
-        <td>Число свободных мест</td>
+        <td>Число мест</td>
         <td>Станция отправления</td>
         <td>Время отправления</td>
         <td>Станция назначения</td>
         <td>Время прибытия</td>
+        <c:if test="${role==1}"><td>Билет</a> </td></c:if>
+
     </tr>
     <c:forEach var="train" items="${trains}">
         <tr>
@@ -34,7 +36,7 @@
 
             <td>${train.schedules.get(train.schedules.size()-1).station.name}</td>
             <td>${train.schedules.get(train.schedules.size()-1).arrivalTime.toLocaleString()}</td>
-            <c:if test="${role==1}"><td><a href="/passenger/ticketPurchase/${train.id}/${departure}/${destination}">Купить билет</a> </td></c:if>
+            <c:if test="${role==1}"><td><a href="passenger/ticketPurchase/${train.id}/${departure}/${destination}">Купить билет</a> </td></c:if>
         </tr>
     </c:forEach>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

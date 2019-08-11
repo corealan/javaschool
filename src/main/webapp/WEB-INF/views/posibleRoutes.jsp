@@ -8,7 +8,7 @@
 </head>
 <body>
 <c:import url="employeeNav.jsp"/>
-<form action="/admin/routeStationSelect" method="POST">
+<form action="routeStationSelect" method="POST">
     <select name="route" size="${routes.size()}">
         <c:forEach var = "route" items="${routes}">
             <option value="${route}">

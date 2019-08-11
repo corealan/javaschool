@@ -10,7 +10,7 @@
     <packaging>war</packaging>
     <build>
 
-        <finalName>secTest</finalName>
+        <finalName>HelloRailRoad</finalName>
 
         <plugins>
             <plugin>

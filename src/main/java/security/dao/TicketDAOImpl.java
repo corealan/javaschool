@@ -45,7 +45,7 @@ public class TicketDAOImpl implements  TicketDAO{
     public List<Ticket> getTicketsOnTrain(Train train) {
         List<Ticket> ticketsOnTrain = new ArrayList<Ticket>();
         for (Ticket t : getAllTickets()) {
-            if (t.getTrain().equals(train)) {
+            if (t.getTrain().getId() == train.getId()) {
                 ticketsOnTrain.add(t);
             }
         }

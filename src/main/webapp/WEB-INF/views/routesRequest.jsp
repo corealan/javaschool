@@ -9,7 +9,7 @@
 <body>
 <c:import url="employeeNav.jsp"/>
 <div class="form">
-    <form action="/admin/getRoutes" method="POST">
+    <form action="getRoutes" method="POST">
         <table>
             <caption>Введите станции отправления и назначения:</caption>
             <tr>
@@ -21,7 +21,7 @@
                 <td><input type='text' name='destination' value=''><br></td>
             </tr>
         </table>
-        <button type="submit">"Показать возможные маршруты"</button>
+        <button type="submit">Показать возможные маршруты</button>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     </form>
 </div>

@@ -91,6 +91,10 @@ public class TrainServiceImpl implements TrainService{
         return trainDAO.findTrainById(id);
     }
 
+    public Train findTrainByNumber(Integer number) {
+        return trainDAO.findTrainByNumber(number);
+    }
+
     private Date getDate(String s){
         s = s.replace("T"," ");
         Date date = null;

@@ -4,26 +4,51 @@
 <html>
 <head>
     <title>Клиентам</title>
+    <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
+
 </head>
 <body>
-<h2>${welcomeMessage}</h2>
-<h3>${message}</h3>
-<p><strong>Чего бы вы хотели?</strong></p>
-<ul>
+<c:import url="nav.jsp"/>
+<div id="find-train" class="form">
+    <form action="findTrains" method="post">
+        <table>
+            <caption>Поиск поездов</caption>
+            <tr>
+                <td>Станция отправления:</td>
+                <td><input type='text' name='departure' required value=''></td>
+            </tr>
+            <tr>
+                <td>Станция назначения:</td>
+                <td><input type='text' name='destination' required value=''><br></td>
+            </tr>
+            <tr>
+                <td>В период с:</td>
+                <td><input type="datetime-local" required name="after"/></td>
 
-    <li><a href="/passenger/findTrains">Найти поезд</a></li>
-    <li><a href="/passenger/getSchedule">Посмотреть расписание</a> </li>
-    <li><a href="/passenger/ticketPurchase">Купить билет</a> </li>
+            </tr>
+            <tr>
+                <td>По:</td>
+                <td><input type="datetime-local" required name="before"/></td>
 
-</ul>
-<a href="<c:url value="/"/> ">На Главную!</a>
+            </tr>
+        </table>
+        <button type="submit">Найти поезда</button>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+</div>
 
-<form action="logout" method="post">
-    <input type="hidden" name="${_csrf.parameterName}"
-           value="${_csrf.token}" />
-
-    <input type="submit" value="Logout">
+</div>
+<form class="form" id="schedule" action="getSchedule" method="POST">
+    <label>Расписание</label>
+    <input type="text" name="station" list="stationList" placeholder="Название станции"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <button type="submit">Посмотреть расписание</button>
 </form>
 
+<datalist id="stationList" >
+    <c:forEach var="station" items="${stations}">
+        <option value="${station.name}"/>
+    </c:forEach>
+</datalist>
 </body>
 </html>

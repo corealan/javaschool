@@ -7,12 +7,10 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="/passenger/findTrains">Найти поезд</a>
-    <a href="/passenger/getSchedule">Расписание</a>
+    <a class="active" href="/HelloRailRoad">Главная</a>
     <div class="topnav-right">
-        <a href="/admin">Сотрудникам</a>
-        <a href="/logout">Выход</a>
+        <a href="/HelloRailRoad/admin">Сотрудникам</a>
+        <a href="/HelloRailRoad/logout">Выход</a>
     </div>
 </div>
 </body>

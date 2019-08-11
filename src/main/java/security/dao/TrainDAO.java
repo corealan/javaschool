@@ -11,5 +11,6 @@ public interface TrainDAO {
     Train findTrainById(Long id);
     List<Train> getAllTrains();
     List<Train> getTrainsBetweenStations(Station a, Station b, Date from, Date to);
+    Train findTrainByNumber(Integer number);
 
 }

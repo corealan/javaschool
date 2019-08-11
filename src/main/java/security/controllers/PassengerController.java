@@ -11,7 +11,6 @@ import security.service.TrainService;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/passenger")
 public class PassengerController {
 
     @Autowired
@@ -20,9 +19,10 @@ public class PassengerController {
     @Autowired
     private StationService stationService;
 
-    @GetMapping(value = "/findTrains")
-    public String findTrains(){
-        return "findTrains";
+
+    @GetMapping(value = "/")
+    public String passenger(){
+        return "passenger";
     }
 
     @PostMapping(value = "/findTrains")

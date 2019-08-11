@@ -63,17 +63,47 @@
 #schedule-table{
     width: 75%;
     margin: auto;
-    float: right;
 }
 #schedule{
-    max-width: 200px;
+    max-width: 400px;
     float: left;
+    margin: 30px 50px;
 }
+#schedule label{
+    font-family: "Roboto Slab",serif;
+    font-size: 26px;
+    font-size: 26px;
+    text-align: center;
+    margin: auto 30px;
+}
+
+#find-train{
+    max-width: 400px;
+    float: right;
+    margin: 30px 50px;
+}
+#find-train caption{
+    font-family: "Roboto Slab",serif;
+    font-style: normal;
+    font-size: 26px;
+    text-align: center;
+    margin: auto 30px;
+}
+
+#route-select-form input{
+    width: 200px;
+    text-align: center;
+}
+
+#route-select{
+    width: 100%;
+}
+
 .form {
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    max-width: 650px;
+    max-width: 850px;
     margin: 30px auto auto;
     padding: 45px;
     text-align: center;
@@ -164,3 +194,59 @@ table {
     width: 100%
 }
 
+
+.msg{
+    background-size: 40px 40px;
+    background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+    transparent 75%, transparent);
+    background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+    transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+    transparent 75%, transparent);
+    box-shadow: 0 0 8px rgba(0,0,0,.3);
+    font:20px 'Open Sans';
+    font-family: "Roboto", sans-serif;
+    width: 85%;
+    margin: 20px auto;
+    padding:15px;
+    -moz-animation: bg-animate 5s linear infinite;
+    -webkit-animation: bg-animate 5s linear infinite;
+    -ms-animation: bg-animate 5s linear infinite;
+    animation: bg-animate 5s linear infinite;
+}
+
+/* заголовок сообщения */
+.msg span{font-weight:600;}
+
+/* кнопка закрытия */
+.msg #close{float:right; color:inherit; text-decoration:none;}
+
+/* сообщение об ошибке */
+.msg#error{
+    background-color:tomato;
+    border-left:7px #dc3d21 solid;
+    color:white;
+}
+
+/* предупреждение */
+.msg#warning{
+    background-color: #eaaf51;
+    border-left:7px #df8b00 solid;
+    color:#6b6d31;
+}
+
+/* инфо-блок */
+.msg#info{
+    background-color: #4ea5cd;
+    border-left:7px #3b8eb5 solid;
+    color:#beecfc;
+}
+/* успешное событие */
+.msg#success{
+    background-color: #61b832;
+    border-left:7px #55a12c solid;
+    color:#296829;
+}

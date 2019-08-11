@@ -17,7 +17,7 @@
             <input name="password" type="password" placeholder="Пароль"/>
             <button type="submit">Войти</button>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <p class="message">Не зарегистрированы? <a href="/registration">Зарегистрироваться</a></p>
+            <p class="message">Не зарегистрированы? <a href="/HelloRailRoad/registration">Зарегистрироваться</a></p>
         </form>
     </div>
 </div>

@@ -6,13 +6,14 @@
 <body>
 <div class="topnav">
 
-    <a class="active" href="#home">Главная</a>
-    <a href="/admin/addNewStation">Добавить станцию</a>
-    <a href="/admin/routesRequest">Добавить поезд</a>
-    <a href="/admin/getAllTrains">Список поездов</a>
-    <a href="/passenger/getSchedule">Зарегистрированные пассажиры</a>
+    <a class="active" href="/HelloRailRoad/admin/">Главная</a>
+    <a href="/HelloRailRoad/admin/addNewStation">Добавить станцию</a>
+    <a href="/HelloRailRoad/admin/routesRequest">Добавить поезд</a>
+    <a href="/HelloRailRoad/admin/getAllTrains">Список поездов</a>
+
+    <a href="/HelloRailRoad/admin/passengersOnTrain">Зарегистрированные пассажиры</a>
     <div class="topnav-right">
-        <a href="/logout">Выход</a>
+        <a href="/HelloRailRoad/logout">Выход</a>
     </div>
 </div>
 </body>
